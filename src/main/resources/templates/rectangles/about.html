@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Rectangle List</title>
+    <title>About - MyApp</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         html, body {
@@ -21,7 +21,7 @@
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">MyApp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -46,36 +46,28 @@
 
     <!-- Main Content -->
     <div class="container mt-5 content">
-        <h2 class="mb-4">Rectangle List</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Width</th>
-                    <th>Height</th>
-                    <th>Color</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="rectangle : ${rectangles}">
-                    <td>
-                        <a th:href="@{/rectangles/view/{id}(id=${rectangle.id})}" th:text="${rectangle.name}"></a>
-                    </td>
-                    <td th:text="${rectangle.width}"></td>
-                    <td th:text="${rectangle.height}"></td>
-                    <td th:text="${rectangle.color}"></td>
-                    <td>
-                        <a th:href="@{/rectangles/delete/{id}(id=${rectangle.id})}" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <a href="/rectangles/new" class="btn btn-primary">Add New Rectangle</a>
+        <h2>About This Project</h2>
+        <p>This project is a simple CRUD (Create, Read, Update, Delete) application to manage rectangles using the Java Spring framework. It was developed as part of an assignment for CMPT 276 at Simon Fraser University.</p>
+        <h4>Features:</h4>
+        <ul>
+            <li>Add new rectangles to the database</li>
+            <li>Delete existing rectangles</li>
+            <li>Edit the details of existing rectangles</li>
+            <li>View information about all rectangles in the database</li>
+        </ul>
+        <h4>Technologies Used:</h4>
+        <ul>
+            <li>Java Spring Boot</li>
+            <li>Thymeleaf</li>
+            <li>Bootstrap</li>
+            <li>H2 Database</li>
+        </ul>
+        <h4>About the Developer:</h4>
+        <p>This application was developed by Harry Gabbi, a computer science student at Simon Fraser University. This project is part of the coursework for CMPT 276, focusing on software development and engineering practices.</p>
     </div>
 
     <!-- Footer -->
-    <footer class="footer bg-dark p-3">
+    <footer class="footer bg-light p-3">
         <div class="container">
             <span class="text-muted">&copy; 2024 MyApp. All rights reserved.</span>
         </div>

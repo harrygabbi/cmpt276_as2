@@ -20,6 +20,18 @@ public class RectangleController {
     @Autowired
     private RectangleRepository service;
 
+    @GetMapping("/")
+    public String homePage(Model model) {
+        model.addAttribute("rectangles", service.findAll());
+        return "rectangles/home";
+    }
+
+    @GetMapping("/rectangles/about")
+    public String aboutPage(Model model) {
+        model.addAttribute("rectangles", service.findAll());
+        return "rectangles/about";
+    }
+
     @GetMapping("/rectangles/view")
     public String getAllRectangles(Model model) {
         model.addAttribute("rectangles", service.findAll());
@@ -33,24 +45,22 @@ public class RectangleController {
     }
 
     @PostMapping("/rectangles/add")
-public String addNewRectangle(@ModelAttribute Rectangle rectangle, Model model) {
-    if (rectangle.getName() == null || rectangle.getName().isEmpty() ||
-        rectangle.getWidth() == null || rectangle.getHeight() == null ||
-        rectangle.getColor() == null || rectangle.getColor().isEmpty() ||
-        rectangle.getBorderColor() == null || rectangle.getBorderColor().isEmpty() ||
-        rectangle.getBorderWidth() == null || rectangle.getOpacity() == null) {
-        model.addAttribute("error", "All fields are required.");
-        model.addAttribute("rectangle", rectangle);
-        return "rectangles/addR";
+    public String addNewRectangle(@ModelAttribute Rectangle rectangle, Model model) {
+        if (rectangle.getName() == null || rectangle.getName().isEmpty() || rectangle.getWidth() == null
+                || rectangle.getHeight() == null || rectangle.getColor() == null || rectangle.getColor().isEmpty()
+                || rectangle.getBorderColor() == null || rectangle.getBorderColor().isEmpty()
+                || rectangle.getBorderWidth() == null || rectangle.getOpacity() == null) {
+            model.addAttribute("error", "All fields are required.");
+            model.addAttribute("rectangle", rectangle);
+            return "rectangles/addR";
+        }
+
+        rectangle.setCreationDate(LocalDateTime.now());
+        rectangle.setLastModifiedDate(LocalDateTime.now());
+        service.save(rectangle);
+        return "redirect:/rectangles/view";
     }
 
-    rectangle.setCreationDate(LocalDateTime.now());
-    rectangle.setLastModifiedDate(LocalDateTime.now());
-    service.save(rectangle);
-    return "redirect:/rectangles/view";
-}
-
-    
     @GetMapping("/rectangles/delete/{id}")
     public String deleteRectangle(@PathVariable Long id) {
         service.deleteById(id);
@@ -69,19 +79,18 @@ public String addNewRectangle(@ModelAttribute Rectangle rectangle, Model model) 
     }
 
     @PostMapping("/rectangles/edit")
-public String editRectangle(@ModelAttribute Rectangle rectangle, Model model) {
-    if (rectangle.getName() == null || rectangle.getName().isEmpty() ||
-        rectangle.getWidth() == null || rectangle.getHeight() == null ||
-        rectangle.getColor() == null || rectangle.getColor().isEmpty() ||
-        rectangle.getBorderColor() == null || rectangle.getBorderColor().isEmpty() ||
-        rectangle.getBorderWidth() == null || rectangle.getOpacity() == null) {
-        model.addAttribute("error", "All fields are required.");
-        model.addAttribute("rectangle", rectangle);
-        return "rectangles/rectangleDetail";
-    }
+    public String editRectangle(@ModelAttribute Rectangle rectangle, Model model) {
+        if (rectangle.getName() == null || rectangle.getName().isEmpty() || rectangle.getWidth() == null
+                || rectangle.getHeight() == null || rectangle.getColor() == null || rectangle.getColor().isEmpty()
+                || rectangle.getBorderColor() == null || rectangle.getBorderColor().isEmpty()
+                || rectangle.getBorderWidth() == null || rectangle.getOpacity() == null) {
+            model.addAttribute("error", "All fields are required.");
+            model.addAttribute("rectangle", rectangle);
+            return "rectangles/rectangleDetail";
+        }
 
-    rectangle.setLastModifiedDate(LocalDateTime.now());
-    service.save(rectangle);
-    return "redirect:/rectangles/view";
-}
+        rectangle.setLastModifiedDate(LocalDateTime.now());
+        service.save(rectangle);
+        return "redirect:/rectangles/view";
+    }
 }

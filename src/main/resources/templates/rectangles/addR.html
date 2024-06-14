@@ -4,7 +4,36 @@
     <title>Add Rectangle</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
+<style>
+    body{
+            margin-bottom: 30px;
+        }
+</style>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">MyApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rectangles/view">View Rectangles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rectangles/new">Insert Rectangle</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rectangles/about">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container mt-5">
         <h3>Add New Rectangle</h3>
         <form th:action="@{/rectangles/add}" th:object="${rectangle}" method="post">
@@ -44,5 +73,10 @@
         </form>
         <a href="/rectangles/view" class="btn btn-secondary mt-3">Back to List</a>
     </div>
+    <footer class="footer bg-light p-3">
+        <div class="container">
+            <span class="text-muted">&copy; 2024 MyApp. All rights reserved.</span>
+        </div>
+    </footer>
 </body>
 </html>
