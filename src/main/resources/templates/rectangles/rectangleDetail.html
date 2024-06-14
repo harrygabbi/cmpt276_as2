@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rectangle Detail</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            margin-bottom: 30px;
+        }
+        .rectangle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            width: 100%;
+            color: #ffffff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="rectangle" th:style="'background-color:' + ${rectangle.color} + '; opacity:' + ${rectangle.opacity} + '; border: ' + ${rectangle.borderWidth} + 'px solid ' + ${rectangle.borderColor}">
+            <span th:text="${rectangle.name}"></span>
+        </div>
+        <h3>Edit Rectangle</h3>
+        <form th:action="@{/rectangles/edit}" th:object="${rectangle}" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter name" required>
+            </div>
+            <div class="form-group">
+                <label for="width">Width</label>
+                <input type="number" step="any" class="form-control" id="width" th:field="*{width}" placeholder="Enter width" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Height</label>
+                <input type="number" step="any" class="form-control" id="height" th:field="*{height}" placeholder="Enter height" required>
+            </div>
+            <div class="form-group">
+                <label for="color">Color</label>
+                <input type="text" class="form-control" id="color" th:field="*{color}" placeholder="Enter color" required>
+            </div>
+            <div class="form-group">
+                <label for="borderColor">Border Color</label>
+                <input type="text" class="form-control" id="borderColor" th:field="*{borderColor}" placeholder="Enter border color" required>
+            </div>
+            <div class="form-group">
+                <label for="borderWidth">Border Width</label>
+                <input type="number" step="any" class="form-control" id="borderWidth" th:field="*{borderWidth}" placeholder="Enter border width" required>
+            </div>
+            <div class="form-group">
+                <label for="opacity">Opacity</label>
+                <input type="number" step="any" class="form-control" id="opacity" th:field="*{opacity}" placeholder="Enter opacity" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" th:field="*{description}" placeholder="Enter description"></textarea>
+            </div>
+            <input type="hidden" th:field="*{id}" />
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+        <h5 class="mt-4">Last Modified: <span th:text="${rectangle.lastModifiedDate}"></span></h5>
+        <a href="/rectangles/view" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
+</body>
+</html>

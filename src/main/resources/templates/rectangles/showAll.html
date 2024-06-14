@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rectangle List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Rectangle List</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Width</th>
+                    <th>Height</th>
+                    <th>Color</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="rectangle : ${rectangles}">
+                    <td>
+                        <a th:href="@{/rectangles/view/{id}(id=${rectangle.id})}" th:text="${rectangle.name}"></a>
+                    </td>
+                    <td th:text="${rectangle.width}"></td>
+                    <td th:text="${rectangle.height}"></td>
+                    <td th:text="${rectangle.color}"></td>
+                    <td>
+                        <a th:href="@{/rectangles/delete/{id}(id=${rectangle.id})}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/rectangles/new" class="btn btn-primary">Add New Rectangle</a>
+    </div>
+</body>
+</html>
