@@ -4,18 +4,18 @@
     <title>Rectangle Detail</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body{
+        body {
             margin-bottom: 30px;
         }
         .rectangle {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 200px;
-            width: 100%;
             color: #ffffff;
             font-size: 24px;
             margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid black; /* Add a border for visibility */
         }
     </style>
 </head>
@@ -43,9 +43,12 @@
         </div>
     </nav>
     <div class="container mt-5">
-        <div class="rectangle" th:style="'background-color:' + ${rectangle.color} + '; opacity:' + ${rectangle.opacity} + '; border: ' + ${rectangle.borderWidth} + 'px solid ' + ${rectangle.borderColor}">
+        <div class="rectangle" th:style="'background-color:' + ${rectangle.color} + '; opacity:' + ${rectangle.opacity} + '; width:' + ${rectangle.width} + 'px !important; height:' + ${rectangle.height} + 'px; border: ' + ${rectangle.borderWidth} + 'px solid ' + ${rectangle.borderColor} + ';'">
             <span th:text="${rectangle.name}"></span>
         </div>
+        <!-- Debugging prints -->
+        <p>Width: <span th:text="${rectangle.width}">Width</span>px</p>
+        <p>Height: <span th:text="${rectangle.height}">Height</span>px</p>
         <h3>Edit Rectangle</h3>
         <form th:action="@{/rectangles/edit}" th:object="${rectangle}" method="post">
             <div class="form-group">
